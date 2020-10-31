@@ -36,6 +36,42 @@ package dictionary is
     default_value : string)
     return string;
 
+  impure function get (
+      d             : frozen_dictionary_t;
+      key           : string;
+      default_value : std_ulogic)
+      return std_ulogic;
+
+  impure function get (
+      d             : frozen_dictionary_t;
+      key           : string;
+      default_value : std_ulogic_vector)
+      return std_ulogic_vector;
+
+  impure function get (
+      d             : frozen_dictionary_t;
+      key           : string;
+      default_value : real)
+      return real;
+
+  impure function get (
+      d             : frozen_dictionary_t;
+      key           : string;
+      default_value : integer)
+      return integer;
+
+  impure function get (
+      d             : frozen_dictionary_t;
+      key           : string;
+      default_value : time)
+      return time;
+
+  impure function get (
+      d             : frozen_dictionary_t;
+      key           : string;
+      default_value : boolean)
+      return boolean;
+
   constant dictionary_logger : logger_t := get_logger("vunit_lib:dictionary");
 
 end package dictionary;
@@ -128,5 +164,58 @@ package body dictionary is
     end if;
   end function get;
 
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : std_ulogic)
+    return std_ulogic is
+  begin
+    return std_ulogic'value(get(d, key, to_string(default_value)));
+  end function get;
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : std_ulogic_vector)
+    return std_ulogic_vector is
+  begin
+    return std_ulogic_vector'value(get(d, key, to_string(default_value)));
+  end function get;
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : real)
+    return real is
+  begin
+    return real'value(get(d, key, to_string(default_value)));
+  end function get;
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : integer)
+    return integer is
+  begin
+    return integer'value(get(d, key, to_string(default_value)));
+  end function get;
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : time)
+    return time is
+  begin
+    return time'value(get(d, key, to_string(default_value)));
+  end function get;
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : boolean)
+    return boolean is
+  begin
+    return boolean'value(get(d, key, to_string(default_value)));
+  end function get;
 
 end package body dictionary;
