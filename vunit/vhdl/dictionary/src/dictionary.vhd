@@ -5,6 +5,9 @@
 -- You can obtain one at http://mozilla.org/MPL/2.0/.
 --
 -- Copyright (c) 2014-2020, Lars Asplund lars.anders.asplund@gmail.com
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 use work.string_ops.all;
 use work.logger_pkg.all;
@@ -47,6 +50,18 @@ package dictionary is
       key           : string;
       default_value : std_ulogic_vector)
       return std_ulogic_vector;
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : signed)
+    return signed;
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : unsigned)
+    return unsigned;
 
   impure function get (
       d             : frozen_dictionary_t;
@@ -180,6 +195,24 @@ package body dictionary is
     return std_ulogic_vector is
   begin
     return std_ulogic_vector'value(get(d, key, to_string(default_value)));
+  end function get;
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : signed)
+    return signed is
+  begin
+    return signed'value(get(d, key, to_string(default_value)));
+  end function get;
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : unsigned)
+    return unsigned is
+  begin
+    return unsigned'value(get(d, key, to_string(default_value)));
   end function get;
 
   impure function get (
