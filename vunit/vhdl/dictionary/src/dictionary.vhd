@@ -225,10 +225,37 @@ package body dictionary is
   impure function get (
     d             : frozen_dictionary_t;
     key           : string;
+    default_value : character)
+    return character is
+  begin
+    return character'value(get(d, key, to_string(default_value)));
+  end function get;
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : bit)
+    return bit is
+  begin
+    return bit'value(get(d, key, to_string(default_value)));
+  end function get;
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
     default_value : std_ulogic)
     return std_ulogic is
   begin
     return std_ulogic'value(get(d, key, to_string(default_value)));
+  end function get;
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : bit_vector)
+    return bit_vector is
+  begin
+    return bit_vector'value(get(d, key, to_string(default_value)));
   end function get;
 
   impure function get (
