@@ -8,6 +8,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.numeric_bit.all;
 
 use work.string_ops.all;
 use work.logger_pkg.all;
@@ -39,11 +40,39 @@ package dictionary is
     default_value : string)
     return string;
 
+  alias get_string is get[frozen_dictionary_t, string, string return string];
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : character)
+    return character;
+
+  alias get_character is get[frozen_dictionary_t, string, character return character];
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : bit)
+    return bit;
+
+  alias get_bit is get[frozen_dictionary_t, string, bit return bit];
+
   impure function get (
       d             : frozen_dictionary_t;
       key           : string;
       default_value : std_ulogic)
       return std_ulogic;
+
+  alias get_std_ulogic is get[frozen_dictionary_t, string, std_ulogic return std_ulogic];
+
+  impure function get (
+    d             : frozen_dictionary_t;
+    key           : string;
+    default_value : bit_vector)
+    return bit_vector;
+
+  alias get_bit_vector is get[frozen_dictionary_t, string, bit_vector return bit_vector];
 
   impure function get (
       d             : frozen_dictionary_t;
@@ -51,11 +80,15 @@ package dictionary is
       default_value : std_ulogic_vector)
       return std_ulogic_vector;
 
+  alias get_std_ulogic_vector is get[frozen_dictionary_t, string, std_ulogic_vector return std_ulogic_vector];
+
   impure function get (
     d             : frozen_dictionary_t;
     key           : string;
     default_value : signed)
     return signed;
+
+  alias get_signed is get[frozen_dictionary_t, string, signed return signed];
 
   impure function get (
     d             : frozen_dictionary_t;
@@ -63,11 +96,15 @@ package dictionary is
     default_value : unsigned)
     return unsigned;
 
+  alias get_unsigned is get[frozen_dictionary_t, string, unsigned return unsigned];
+
   impure function get (
       d             : frozen_dictionary_t;
       key           : string;
       default_value : real)
       return real;
+
+  alias get_real is get[frozen_dictionary_t, string, real return real];
 
   impure function get (
       d             : frozen_dictionary_t;
@@ -75,17 +112,23 @@ package dictionary is
       default_value : integer)
       return integer;
 
+  alias get_integer is get[frozen_dictionary_t, string, integer return integer];
+
   impure function get (
       d             : frozen_dictionary_t;
       key           : string;
       default_value : time)
       return time;
 
+  alias get_time is get[frozen_dictionary_t, string, time return time];
+
   impure function get (
       d             : frozen_dictionary_t;
       key           : string;
       default_value : boolean)
       return boolean;
+
+  alias get_boolean is get[frozen_dictionary_t, string, boolean return boolean];
 
   constant dictionary_logger : logger_t := get_logger("vunit_lib:dictionary");
 
