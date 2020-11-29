@@ -3,6 +3,10 @@
 -- You can obtain one at http://mozilla.org/MPL/2.0/.
 --
 -- Copyright (c) 2014-2020, Lars Asplund lars.anders.asplund@gmail.com
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.numeric_bit.all;
 
 library vunit_lib;
 use vunit_lib.log_levels_pkg.all;
@@ -74,6 +78,35 @@ begin
       elsif run("Test that get with default value returns default value for non-existing key") then
         passed := get(test_dict, "meatballs", "falafel") = "falafel";
         check(passed, "Expected ""falafel"" when getting meatballs key from test dictionary (got """ & get(test_dict, "meatballs", "falafel") & """).");
+        passed := get(test_dict, "string", string'("falafel")) = string'("falafel");
+        check(passed, "Expected ""falafel"" when getting string key from test dictionary (got """ & get(test_dict, "string", string'("falafel")) & """).");
+        --passed := get_character(test_dict, "character", ieee.numeric_std.character'('=')) = ieee.numeric_std.character'('=');
+        --check(passed, "Expected ""="" when getting character key from test dictionary (got """ & get_character(test_dict, "character", ieee.numeric_std.character'('=')) & """).");
+        passed := get(test_dict, "bit", bit'('1')) = bit'('1');
+        check(passed, "Expected ""1"" when getting bit key from test dictionary (got """ & to_string(get(test_dict, "bit", bit'('1'))) & """).");
+        passed := get(test_dict, "std_ulogic", std_ulogic'('0')) = std_ulogic'('0');
+        check(passed, "Expected ""0"" when getting std_ulogic key from test dictionary (got """ & to_string(get(test_dict, "std_ulogic", std_ulogic'('0'))) & """).");
+        --passed := get(test_dict, "bit_vector", bit_vector'("0100")) = bit_vector'("0100");
+        --check(passed, "Expected ""0100"" when getting bit_vector key from test dictionary (got """ & get(test_dict, "bit_vector", bit_vector'("0100")) & """).");
+        --passed := get(test_dict, "std_ulogic_vector", std_ulogic_vector'("1110100")) = std_ulogic_vector'("1110100");
+        --check(passed, "Expected ""1110100"" when getting std_ulogic_vector key from test dictionary (got """ & get(test_dict, "std_ulogic_vector", std_ulogic_vector'("1110100")) & """).");
+        --passed := get(test_dict, "signed", numeric_bit.signed'("1101001")) = numeric_bit.signed'("1101001");
+        --check(passed, "Expected ""1101001"" when getting numeric_bit.signed key from test dictionary (got """ & get(test_dict, "numeric_bit.signed", numeric_bit.signed'("1101001")) & """).");
+        --passed := get(test_dict, "unsigned", numeric_bit.unsigned'("0101011")) = numeric_bit.unsigned'("0101011");
+        --check(passed, "Expected ""0101011"" when getting numeric_bit.unsigned key from test dictionary (got """ & get(test_dict, "numeric_bit.unsigned", numeric_bit.unsigned'("0101011")) & """).");
+        --passed := get(test_dict, "signed", ieee.numeric_std.signed'("1101001")) = ieee.numeric_std.signed'("1101001");
+        --check(passed, "Expected ""1101001"" when getting ieee.numeric_std.signed key from test dictionary (got """ & get(test_dict, "ieee.numeric_std.signed", ieee.numeric_std.signed'("1101001")) & """).");
+        --passed := get(test_dict, "unsigned", ieee.numeric_std.unsigned'("0101011")) = ieee.numeric_std.unsigned'("0101011");
+        --check(passed, "Expected ""0101011"" when getting ieee.numeric_std.unsigned key from test dictionary (got """ & get(test_dict, "ieee.numeric_std.unsigned", ieee.numeric_std.unsigned'("0101011")) & """).");
+        passed := get(test_dict, "real", 123.456789) = 123.456789;
+        check(passed, "Expected ""123.456789"" when getting real key from test dictionary (got """ & to_string(get(test_dict, "real", 123.456789)) & """).");
+        passed := get(test_dict, "integer", 123456789) = 123456789;
+        check(passed, "Expected ""123456789"" when getting integer key from test dictionary (got """ & to_string(get(test_dict, "integer", 123456789)) & """).");
+        passed := get(test_dict, "time", 12.34 ms) = 12.34 ms;
+        check(passed, "Expected ""12.34 s"" when getting time key from test dictionary (got """ & to_string(get(test_dict, "time", 12.34 ms)) & """).");
+        passed := get(test_dict, "boolean", false) = false;
+        check(passed, "Expected ""false"" when getting boolean key from test dictionary (got """ & to_string(get(test_dict, "boolean", false)) & """).");
+
       end if;
     end loop;
 

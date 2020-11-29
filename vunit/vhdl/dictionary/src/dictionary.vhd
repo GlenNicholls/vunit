@@ -7,8 +7,8 @@
 -- Copyright (c) 2014-2020, Lars Asplund lars.anders.asplund@gmail.com
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
 use ieee.numeric_bit.all;
+use ieee.numeric_std.all;
 
 use work.string_ops.all;
 use work.logger_pkg.all;
@@ -66,37 +66,53 @@ package dictionary is
 
   alias get_std_ulogic is get[frozen_dictionary_t, string, std_ulogic return std_ulogic];
 
-  impure function get (
-    d             : frozen_dictionary_t;
-    key           : string;
-    default_value : bit_vector)
-    return bit_vector;
-
-  alias get_bit_vector is get[frozen_dictionary_t, string, bit_vector return bit_vector];
-
-  impure function get (
-      d             : frozen_dictionary_t;
-      key           : string;
-      default_value : std_ulogic_vector)
-      return std_ulogic_vector;
-
-  alias get_std_ulogic_vector is get[frozen_dictionary_t, string, std_ulogic_vector return std_ulogic_vector];
-
-  impure function get (
-    d             : frozen_dictionary_t;
-    key           : string;
-    default_value : signed)
-    return signed;
-
-  alias get_signed is get[frozen_dictionary_t, string, signed return signed];
-
-  impure function get (
-    d             : frozen_dictionary_t;
-    key           : string;
-    default_value : unsigned)
-    return unsigned;
-
-  alias get_unsigned is get[frozen_dictionary_t, string, unsigned return unsigned];
+  --impure function get (
+  --  d             : frozen_dictionary_t;
+  --  key           : string;
+  --  default_value : bit_vector)
+  --  return bit_vector;
+--
+  --alias get_bit_vector is get[frozen_dictionary_t, string, bit_vector return bit_vector];
+--
+  --impure function get (
+  --    d             : frozen_dictionary_t;
+  --    key           : string;
+  --    default_value : std_ulogic_vector)
+  --    return std_ulogic_vector;
+--
+  --alias get_std_ulogic_vector is get[frozen_dictionary_t, string, std_ulogic_vector return std_ulogic_vector];
+--
+  --impure function get (
+  --  d             : frozen_dictionary_t;
+  --  key           : string;
+  --  default_value : ieee.numeric_bit.signed)
+  --  return ieee.numeric_bit.signed;
+--
+  --alias get_numeric_bit_signed is get[frozen_dictionary_t, string, ieee.numeric_bit.signed return ieee.numeric_bit.signed];
+--
+  --impure function get (
+  --  d             : frozen_dictionary_t;
+  --  key           : string;
+  --  default_value : ieee.numeric_std.signed)
+  --  return ieee.numeric_std.signed;
+--
+  --alias get_numeric_std_signed is get[frozen_dictionary_t, string, ieee.numeric_std.signed return ieee.numeric_std.signed];
+--
+  --impure function get (
+  --  d             : frozen_dictionary_t;
+  --  key           : string;
+  --  default_value : ieee.numeric_bit.unsigned)
+  --  return ieee.numeric_bit.unsigned;
+--
+  --alias get_numeric_bit_unsigned is get[frozen_dictionary_t, string, ieee.numeric_bit.unsigned return ieee.numeric_bit.unsigned];
+--
+  --impure function get (
+  --  d             : frozen_dictionary_t;
+  --  key           : string;
+  --  default_value : ieee.numeric_std.unsigned)
+  --  return ieee.numeric_std.unsigned;
+--
+  --alias get_numeric_std_unsigned is get[frozen_dictionary_t, string, ieee.numeric_std.unsigned return ieee.numeric_std.unsigned];
 
   impure function get (
       d             : frozen_dictionary_t;
@@ -249,41 +265,59 @@ package body dictionary is
     return std_ulogic'value(get(d, key, to_string(default_value)));
   end function get;
 
-  impure function get (
-    d             : frozen_dictionary_t;
-    key           : string;
-    default_value : bit_vector)
-    return bit_vector is
-  begin
-    return bit_vector'value(get(d, key, to_string(default_value)));
-  end function get;
+  --impure function get (
+  --  d             : frozen_dictionary_t;
+  --  key           : string;
+  --  default_value : bit_vector)
+  --  return bit_vector is
+  --begin
+  --  return bit_vector'value(get(d, key, to_string(default_value)));
+  --end function get;
 
-  impure function get (
-    d             : frozen_dictionary_t;
-    key           : string;
-    default_value : std_ulogic_vector)
-    return std_ulogic_vector is
-  begin
-    return std_ulogic_vector'value(get(d, key, to_string(default_value)));
-  end function get;
-
-  impure function get (
-    d             : frozen_dictionary_t;
-    key           : string;
-    default_value : signed)
-    return signed is
-  begin
-    return signed'value(get(d, key, to_string(default_value)));
-  end function get;
-
-  impure function get (
-    d             : frozen_dictionary_t;
-    key           : string;
-    default_value : unsigned)
-    return unsigned is
-  begin
-    return unsigned'value(get(d, key, to_string(default_value)));
-  end function get;
+  --impure function get (
+  --  d             : frozen_dictionary_t;
+  --  key           : string;
+  --  default_value : std_ulogic_vector)
+  --  return std_ulogic_vector is
+  --begin
+  --  return std_ulogic_vector'value(get(d, key, to_string(default_value)));
+  --end function get;
+--
+  --impure function get (
+  --  d             : frozen_dictionary_t;
+  --  key           : string;
+  --  default_value : ieee.numeric_bit.signed)
+  --  return ieee.numeric_bit.signed is
+  --begin
+  --  return ieee.numeric_bit.signed'value(get(d, key, to_string(default_value)));
+  --end function get;
+--
+  --impure function get (
+  --  d             : frozen_dictionary_t;
+  --  key           : string;
+  --  default_value : ieee.numeric_std.signed)
+  --  return ieee.numeric_std.signed is
+  --begin
+  --  return ieee.numeric_std.signed'value(get(d, key, to_string(default_value)));
+  --end function get;
+--
+  --impure function get (
+  --  d             : frozen_dictionary_t;
+  --  key           : string;
+  --  default_value : ieee.numeric_bit.unsigned)
+  --  return ieee.numeric_bit.unsigned is
+  --begin
+  --  return ieee.numeric_bit.unsigned'value(get(d, key, to_string(default_value)));
+  --end function get;
+--
+  --impure function get (
+  --  d             : frozen_dictionary_t;
+  --  key           : string;
+  --  default_value : ieee.numeric_std.unsigned)
+  --  return ieee.numeric_std.unsigned is
+  --begin
+  --  return ieee.numeric_std.unsigned'value(get(d, key, to_string(default_value)));
+  --end function get;
 
   impure function get (
     d             : frozen_dictionary_t;
